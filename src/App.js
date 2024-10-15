@@ -1,24 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
 
 function App() {
+  const [playlist, setPlaylist] = useState("")
+
+  useEffect(() => {
+    fetch("/api/route").then(
+      res => res.json()
+    ).then(
+      data => {
+        setPlaylist(data.playlist)
+        console.log(data)
+      });
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <p>
+      {playlist}
+    </p>
   );
 }
 
